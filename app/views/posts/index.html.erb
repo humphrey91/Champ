@@ -2,7 +2,7 @@
 
 <h1>Posts</h1>
 
-<table>
+<table class="table table-scroll">
   <thead>
     <tr>
       <th>Title</th>
@@ -18,9 +18,21 @@
         <td><%= post.title %></td>
         <td><%= post.body %></td>
         <td><%= post.published %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to post, title: "show" do %>
+            <i class="icon icon-search"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_post_path(post), title: "edit" do %>
+            <i class="icon icon-edit"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to post, method: :delete, title: "delete", data: { confirm: 'Are you sure?' } do %>
+            <i class="icon icon-delete"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>

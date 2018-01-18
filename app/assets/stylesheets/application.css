@@ -11,6 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  *= require spectre.css/dist/spectre.min.css
+ *= require spectre.css/dist/spectre-icons.min.css
+ *= require spectre.css/dist/spectre-exp.min.css
  *= require_tree .
  *= require_self
  */

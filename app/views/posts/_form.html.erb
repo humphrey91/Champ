@@ -1,32 +1,44 @@
-<%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
+<%= form_with(model: post, local: true) do |form| %>
+<% if post.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(post.errors.count, "error") %>
+      prohibited this post from being saved:</h2>
+
+    <ul>
       <% post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-group">
+  <div class="col-3">
+    <div class="has-icon-left">
+      <%= form.text_field :title, id: :post_title, class: "form-input input-sm", placeholder: "Title" %>
+      <i class="form-icon icon icon-arrow-right"></i>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :post_title %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body, id: :post_body %>
+<div class="form-group">
+  <div class="col-3">
+    <div class="has-icon-left">
+      <%= form.text_area :body, id: :post_body, class: "form-input input-md", placeholder: "Body" %>
+      <i class="form-icon icon icon-arrow-right"></i>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :published %>
+<div class="form-group">
+  <label class="form-checkbox">
     <%= form.check_box :published, id: :post_published %>
-  </div>
+    <i class="form-icon"></i> Published
+  </label>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions">
+  <%= form.submit class: "btn btn-primary btn-sm" %>
+</div>
 <% end %>
