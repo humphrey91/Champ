@@ -1,5 +1,10 @@
-<h1>New Post</h1>
-
-<%= render 'form', post: @post %>
-
-<%= link_to 'Back', posts_path %>
+<div class="container col-mx-auto">
+  <div class="columns">
+    <div class="col-12 col-mx-auto">
+      <h1 style="text-align:center;">New Post</h1>
+    </div>
+    <div class="col-mx-auto">
+      <%= render 'form', post: @post %>
+    </div>
+  </div>
+</div>

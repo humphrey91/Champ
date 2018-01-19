@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
+  include PostsHelper
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  after_action :set_fact, only: [:create, :update]
+
 
   # GET /posts
   # GET /posts.json
@@ -65,6 +68,11 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    # Update post fact on create/update
+    def set_fact
+      @post.update(fact: generate_factorial)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
