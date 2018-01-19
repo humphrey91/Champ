@@ -1,8 +1,11 @@
 class PostsController < ApplicationController
   include PostsHelper
+  protect_from_forgery unless: -> { request.format.json? }
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   after_action :set_fact, only: [:create, :update]
 
+  def main
+  end
 
   # GET /posts
   # GET /posts.json
@@ -59,7 +62,6 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
