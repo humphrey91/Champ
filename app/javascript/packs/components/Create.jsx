@@ -9,6 +9,7 @@ class Create extends Component {
       title: '',
       body: '',
       published: false,
+      fact: 0,
       edit: false,
     };
   }
@@ -21,6 +22,7 @@ class Create extends Component {
         title: this.props.post.title,
         body: this.props.post.body,
         published: this.props.post.published,
+        fact: this.props.post.fact,
         edit: true,
       })
     }

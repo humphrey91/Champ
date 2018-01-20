@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Fact from '../helpers/Fact'
 // components
 import Posts from './Posts'
 import Create from './Create'
@@ -19,6 +19,7 @@ class App extends Component {
         title: "",
         body: "",
         published: false,
+        fact: 0,
       }
     }
 
@@ -73,6 +74,7 @@ class App extends Component {
 
   // handles create request
   createPost(e, state) {
+    state.fact = Fact(Math.floor((Math.random() * 10) + 1))
     e.preventDefault();
     return fetch("/posts", {
       method: "POST",
@@ -97,6 +99,7 @@ class App extends Component {
   }
 
   patchPost(e, state) {
+    state.fact = Fact(Math.floor((Math.random() * 10) + 1))
     e.preventDefault();
     return fetch("/posts/" + state.id, {
       method: "PATCH",
@@ -125,6 +128,7 @@ class App extends Component {
     fetch("/posts.json")
     .then((resp) => resp.json())
     .then((data) => {
+
       this.setIndexPosts(data)
     })
   }

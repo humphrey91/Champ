@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   include PostsHelper
   protect_from_forgery unless: -> { request.format.json? }
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  after_action :set_fact, only: [:create, :update]
+  # after_action :set_fact, only: [:create, :update]
 
   def main
   end
@@ -80,6 +80,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :published)
+      params.require(:post).permit(:title, :body, :published, :fact)
     end
 end

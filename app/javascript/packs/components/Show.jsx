@@ -10,6 +10,7 @@ class Show extends Component {
       title: '',
       body: '',
       published: false,
+      fact: 0,
     },
     edit: false,
     };
@@ -32,7 +33,7 @@ class Show extends Component {
             <div className="card-body" style={{textAlign: "center"}}>
               <p>
                 <strong>Title: </strong>
-                {this.state.post.title}
+                {this.state.post.title}&nbsp;{this.state.post.fact}
               </p>
               <p>
                 <strong>Body: </strong>
