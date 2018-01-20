@@ -5,4 +5,5 @@ module PostsHelper
     (1..rand(1..10)).inject(:*)
   end
 
+  
 end

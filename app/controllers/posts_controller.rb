@@ -1,3 +1,4 @@
+
 class PostsController < ApplicationController
   include PostsHelper
   protect_from_forgery unless: -> { request.format.json? }
