@@ -11,7 +11,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = if params[:term]
+      if params[:term] != ""
+        Post.where('body Like ?', "%#{params[:term]}%").or(Post.where('title Like ?', "%#{params[:term]}%"))
+      else
+        Post.all
+      end
+    else
+      Post.all
+    end
   end
 
   # GET /posts/1
@@ -80,6 +88,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :published, :fact)
+      params.require(:post).permit(:title, :body, :published, :fact, :term)
     end
 end

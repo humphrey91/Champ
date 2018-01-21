@@ -19,7 +19,7 @@ const CreateForm = (props) => (
           </div>
           <div className="form-group">
               <div className="has-icon-left">
-                <textarea name="body" value={props.post.body} onChange={(e) => props.handleInputChange(e)} placeholder="Body" className="form-input input-md"/>
+                <textarea style={{height:"150px"}} name="body" value={props.post.body} onChange={(e) => props.handleInputChange(e)} placeholder="Body" className="form-input input-md"/>
                 <i className="form-icon icon icon-arrow-right"></i>
               </div>
           </div>

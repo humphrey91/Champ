@@ -4,6 +4,8 @@ import Posts from './Posts'
 import Create from './Create'
 import Show from './Show'
 import Post from './Post'
+import Header from './Header'
+import Search from './Search'
 import Fact from '../helpers/Fact';
 import Modal from 'react-modal';
 
@@ -17,6 +19,7 @@ class App extends Component {
       editPost: false,
       showPost: false,
       posts: [],
+      search: "",
       post: {
         id: "",
         title: "",
@@ -33,6 +36,8 @@ class App extends Component {
     this.handleNew = this.handleNew.bind(this)
     this.deletePost = this.deletePost.bind(this)
     this.setPost = this.setPost.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+
   };
 
   // renderPosts on app load
@@ -138,12 +143,19 @@ class App extends Component {
     })
   }
 
+  handleSearch(value) {
+    fetch("/posts.json?term=" + value)
+    .then((resp) => resp.json())
+    .then((data) => {
+      this.setIndexPosts(data)
+    })
+  }
+
   // handles index request
   renderPosts() {
     fetch("/posts.json")
     .then((resp) => resp.json())
     .then((data) => {
-
       this.setIndexPosts(data)
     })
   }
@@ -156,6 +168,13 @@ class App extends Component {
         ...this.state.posts.slice(index + 1)
       ]
     })
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.handleSearch(e.target.value)
   }
 
   getParent() {
@@ -204,8 +223,10 @@ class App extends Component {
         </Modal>
 
         <div className="main">
+          <Header />
           <Posts posts={this.state.posts} />
           <button className="btn btn-primary" onClick={(e) => this.handleNew(e)}>New Post</button>
+          <Search search={this.state.search} handleChange={this.handleChange}/>
         </div>
       </div>
     )
