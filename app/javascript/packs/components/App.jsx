@@ -76,13 +76,13 @@ class App extends Component {
     })
   }
   // handles delete request
-  deletePost(post, i) {
+  deletePost(post) {
     return fetch("/posts/" + post.id, {
       method: 'DELETE',
       })
     .then(response => {
       if(response.ok) {
-        this.removePostAt(i)
+        this.renderPosts()
       }
     })
   }
@@ -160,16 +160,6 @@ class App extends Component {
     })
   }
 
-  // set new state for posts after delete
-  removePostAt(index) {
-    this.setState({
-      posts: [
-        ...this.state.posts.slice(0, index),
-        ...this.state.posts.slice(index + 1)
-      ]
-    })
-  }
-
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -183,10 +173,9 @@ class App extends Component {
 
   // creates posts for index
   setIndexPosts(data) {
-    let posts = data.map((post, i) => {
+    let posts = data.map((post) => {
       return(
         <Post
-          index={i}
           key={post.id}
           post={post}
           showPost={this.showPost}

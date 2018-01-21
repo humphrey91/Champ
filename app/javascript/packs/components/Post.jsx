@@ -29,7 +29,6 @@ Post.propTypes = {
   editPost: PropTypes.func.isRequired,
   setPost: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
 }
 
 export default Post;
