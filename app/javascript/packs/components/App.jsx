@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Fact from '../helpers/Fact'
 // components
 import Posts from './Posts'
 import Create from './Create'
 import Show from './Show'
+import Post from './Post'
+import Fact from '../helpers/Fact';
 
 class App extends Component {
   constructor() {
@@ -19,7 +20,7 @@ class App extends Component {
         title: "",
         body: "",
         published: false,
-        fact: 0,
+        fact: "",
       }
     }
 
@@ -28,6 +29,8 @@ class App extends Component {
     this.editPost = this.editPost.bind(this)
     this.showPost = this.showPost.bind(this)
     this.handleNew = this.handleNew.bind(this)
+    this.deletePost = this.deletePost.bind(this)
+    this.setPost = this.setPost.bind(this)
   };
 
   // renderPosts on app load
@@ -55,6 +58,7 @@ class App extends Component {
     }))
   }
 
+  // set post on show
   setPost(post) {
     this.setState({
       post: post,
@@ -74,7 +78,9 @@ class App extends Component {
 
   // handles create request
   createPost(e, state) {
-    state.fact = Fact(Math.floor((Math.random() * 10) + 1))
+    const fact = Fact(Math.floor((Math.random() * 10) + 1))
+    const newPost = Object.assign({}, state.post);
+    newPost.fact = fact;
     e.preventDefault();
     return fetch("/posts", {
       method: "POST",
@@ -84,7 +90,7 @@ class App extends Component {
       },
       body: JSON.stringify({
           // pass state from <Create />
-          "post": state,
+          "post": newPost,
         })
       })
     .then(response => {
@@ -98,10 +104,13 @@ class App extends Component {
     })
   }
 
+  // handle patch request for post
   patchPost(e, state) {
-    state.fact = Fact(Math.floor((Math.random() * 10) + 1))
+    const fact = Fact(Math.floor((Math.random() * 10) + 1))
+    const newPost = Object.assign({}, state.post);
+    newPost.fact = fact;
     e.preventDefault();
-    return fetch("/posts/" + state.id, {
+    return fetch("/posts/" + state.post.id, {
       method: "PATCH",
       headers: {
         'Accept': 'application/json',
@@ -109,7 +118,7 @@ class App extends Component {
       },
       body: JSON.stringify({
           // pass state from <Create />
-          "post": state,
+          "post": newPost,
         })
       })
     .then(response => {
@@ -143,31 +152,19 @@ class App extends Component {
     })
   }
 
-
-  // TODO: refactor post into its own class
+  // creates posts for index
   setIndexPosts(data) {
     let posts = data.map((post, i) => {
       return(
-        <tr key={post.id}>
-          <td>{post.title}</td>
-          <td>{post.body}</td>
-          <td>{post.published.toString()}</td>
-          <td>
-            <button className="btn btn-primary btn-sm" title="show" onClick={() => {this.showPost(); this.setPost(post)}}>
-              <i className="icon icon-search"></i>
-            </button>
-          </td>
-          <td>
-            <button className="btn btn-primary btn-sm" title="edit" onClick={() => {this.editPost(); this.setPost(post)}}>
-              <i className="icon icon-edit"></i>
-            </button>
-          </td>
-          <td>
-            <button className="btn btn-primary btn-sm" title="delete" onClick={() => {if(confirm("Are you sure?")) {this.deletePost(post, i)};}}>
-              <i className="icon icon-delete"></i>
-            </button>
-          </td>
-        </tr>
+        <Post
+          index={i}
+          key={post.id}
+          post={post}
+          showPost={this.showPost}
+          editPost={this.editPost}
+          setPost={this.setPost}
+          deletePost={this.deletePost}
+        />
       )
     })
     this.setState({posts: posts});
@@ -175,12 +172,16 @@ class App extends Component {
 
   render() {
     let page = null;
+    // render for create
     if (this.state.newPost) {
-      page = <Create handleSubmit={this.createPost} handleNew={this.handleNew}/>
+      page = <Create handleSubmit={this.createPost} handleNew={this.handleNew} editPost={this.editPost}/>
+      // render for edit
     } else if (this.state.editPost) {
       page = <Create handleSubmit={this.patchPost} post={this.state.post} edit={this.state.editPost}  editPost={this.editPost}/>
+      // render for show
     } else if (this.state.showPost) {
       page = <Show post={this.state.post} editPost={this.editPost} showPost={this.showPost} />
+      // render for index
     } else {
       page =
       <div>

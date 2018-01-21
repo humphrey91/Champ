@@ -1,34 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Posts extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Posts = (props) => (
+  <div className="">
+    <h1>Posts</h1>
+    <table className="table table-scroll">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Body</th>
+          <th>Published</th>
+          <th colSpan="3"></th>
+        </tr>
+      </thead>
 
-  render() {
-    return (
-      <div className="">
-        <h1>Posts</h1>
-        <table className="table table-scroll">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Body</th>
-              <th>Published</th>
-              <th colSpan="3"></th>
-            </tr>
-          </thead>
+      <tbody>
+        {props.posts}
+      </tbody>
+    </table>
 
-          <tbody>
-            {this.props.posts}
-          </tbody>
-        </table>
+  <br />
 
-      <br />
+  </div>
+);
 
-      </div>
-    );
-  }
+Posts.propTypes = {
+  posts: PropTypes.array.isRequired,
 }
-
 export default Posts;

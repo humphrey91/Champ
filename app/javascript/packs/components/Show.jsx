@@ -10,7 +10,7 @@ class Show extends Component {
       title: '',
       body: '',
       published: false,
-      fact: 0,
+      fact: '',
     },
     edit: false,
     };
