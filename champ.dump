@@ -1,0 +1,182 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.10
+-- Dumped by pg_dump version 9.5.10
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: josh
+--
+
+CREATE TABLE ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE ar_internal_metadata OWNER TO josh;
+
+--
+-- Name: posts; Type: TABLE; Schema: public; Owner: josh
+--
+
+CREATE TABLE posts (
+    id bigint NOT NULL,
+    title character varying,
+    body text,
+    published boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    fact integer
+);
+
+
+ALTER TABLE posts OWNER TO josh;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: josh
+--
+
+CREATE SEQUENCE posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE posts_id_seq OWNER TO josh;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: josh
+--
+
+ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: josh
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE schema_migrations OWNER TO josh;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: josh
+--
+
+ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: josh
+--
+
+COPY ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2018-01-18 20:46:47.234256	2018-01-18 20:46:47.234256
+\.
+
+
+--
+-- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: josh
+--
+
+COPY posts (id, title, body, published, created_at, updated_at, fact) FROM stdin;
+2	Experience	“Experience is not what happens to a man; it is what a man does with what happens to him.” \r\n― Aldous Huxley	f	2018-01-18 21:29:34.687813	2018-01-18 21:29:34.687813	\N
+1	We are here	"We are here to laugh at the odds and live our lives so well that Death will tremble to take us." ― C.B.	f	2018-01-18 21:26:22.466978	2018-01-18 21:30:23.195315	\N
+158	Success	There is only one success — to be able to spend your life in your own way. ― Christopher Morley	f	2018-01-21 18:00:19.691952	2018-01-21 18:00:40.026116	720
+159	Change	Consider how hard it is to change yourself and you'll understand what little chance you have in trying to change others. ― Jacob Braude	f	2018-01-21 18:01:32.387963	2018-01-21 18:01:46.331133	362880
+3	Learn to fly.	“He who would learn to fly one day must first learn to walk and run and climb and dance; one cannot fly into flying. ” ― Friedrich Nietzsche	f	2018-01-18 21:35:33.055943	2018-01-20 22:13:03.183236	120
+\.
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: josh
+--
+
+SELECT pg_catalog.setval('posts_id_seq', 159, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: josh
+--
+
+COPY schema_migrations (version) FROM stdin;
+20170501195702
+20180119000839
+\.
+
+
+--
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: josh
+--
+
+ALTER TABLE ONLY ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: josh
+--
+
+ALTER TABLE ONLY posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: josh
+--
+
+ALTER TABLE ONLY schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

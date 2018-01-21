@@ -7,27 +7,6 @@ import Post from './Post'
 import Fact from '../helpers/Fact';
 import Modal from 'react-modal';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
-const customStyles2 = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 
 class App extends Component {
   constructor() {
@@ -202,26 +181,16 @@ class App extends Component {
   }
 
   render() {
-    // let page = null;
-    // // render for create
-    // if (this.state.newPost) {
-    //   <Modal isOpen={true}>
-    //   page = <Create handleSubmit={this.createPost} handleNew={this.handleNew} editPost={this.editPost}/>
-    //   </Modal>
-    //   // render for edit
-    // } else if (this.state.editPost) {
-    //   page = <Create handleSubmit={this.patchPost} post={this.state.post} edit={this.state.editPost}  editPost={this.editPost}/>
-    //   // render for show
-    // } else if (this.state.showPost) {
-    //   page = <Show post={this.state.post} editPost={this.editPost} showPost={this.showPost} />
-    //   // render for index
-    // } else {
-    //   page =
-    //   <div>
-    //     <Posts posts={this.state.posts} />
-    //     <button className="btn btn-primary" onClick={(e) => this.handleNew(e)}>New Post</button>
-    //   </div>
-    // }
+    const customStyles = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
+    };
     return (
       <div>
         <Modal isOpen={this.state.newPost} style={customStyles}>
@@ -230,7 +199,7 @@ class App extends Component {
         <Modal isOpen={this.state.editPost} style={customStyles}>
         <Create handleSubmit={this.patchPost} post={this.state.post} edit={this.state.editPost}  editPost={this.editPost}/>
         </Modal>
-        <Modal isOpen={this.state.showPost} style={customStyles2}>
+        <Modal isOpen={this.state.showPost} style={customStyles}>
         <Show post={this.state.post} editPost={this.editPost} showPost={this.showPost} />
         </Modal>
 
