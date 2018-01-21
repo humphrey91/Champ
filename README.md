@@ -23,3 +23,11 @@ To submit your completed challenge, please perform the following:
   1. Zip up the champ directory into `[YOUR NAME]_champ_challenge.zip`.
   1. Email your zip file or send a download link to `turbo@stukent.com`
 
+
+## Search function/Modals
+
+  To implement the Modals I used a package called react-modal. It was very easy to implement into the app. I already had states set for editing/showing/creating so I could simply pass those states
+  into the Modal isOpen prop.
+
+  I thought the search feature would be a nice addition. In an app where users are making a lot of posts it could be useful to filter through the posts. The search feature filters for a search
+  term that matches either the title or the body. When the state of the search box changes a get request is sent with the search term and the posts array updates.
