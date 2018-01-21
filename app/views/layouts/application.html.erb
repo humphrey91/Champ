@@ -5,16 +5,14 @@
     <%= csrf_meta_tags %>
     <%= javascript_pack_tag 'index' %>
     <%= stylesheet_pack_tag 'spectre' %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=.75">
   </head>
 
   <body>
     <div class="container">
       <div class="columns">
         <div class="col-8 col-mx-auto">
-
           <%= yield %>
-
         </div>
       </div>
     </div>

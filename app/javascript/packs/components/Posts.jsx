@@ -2,8 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Posts = (props) => (
-  <div className="">
-    <h1>Posts</h1>
+  <div className="" >
+    <header className="navbar" style={{marginTop:"10px"}}>
+      <section className="navbar-center">
+         <img src="Stukent_Signature_BlueBlue2751.png"></img>
+      </section>
+    </header>
+    <div style={{height: "30px"}}></div>
+    <h1 style={{textAlign: "center"}}>Posts</h1>
     <table className="table table-scroll">
       <thead>
         <tr>

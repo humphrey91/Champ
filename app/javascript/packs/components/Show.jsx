@@ -24,35 +24,31 @@ class Show extends Component {
 
   render() {
     return (
-        <div className="container">
-          <div className="column col-4  col-mx-auto">
-            <div className="card">
-            <div className="card-header">
-              <h1 className="card-title h1" style={{textAlign: "center"}}>Post</h1>
-            </div>
-            <div className="card-body" style={{textAlign: "center"}}>
-              <p>
-                <strong>Title: </strong>
-                {this.state.post.title}&nbsp;{this.state.post.fact}
-              </p>
-              <p>
-                <strong>Body: </strong>
-                {this.state.post.body}
-              </p>
-              <p>
-                <strong>Published: </strong>
-                {this.state.post.published.toString()}
-              </p>
-            </div>
-            <div className="card-footer" style={{textAlign: "right"}}>
-              <button className="btn btn-primary btn-md" title="edit" onClick={() => {this.props.showPost();this.props.editPost()}}>
-                <i className="icon icon-edit"></i>
-              </button>
-              <button style={{marginLeft: "3px"}} className="btn btn-primary btn-md" onClick={() => this.props.showPost()}>
-                <i className="form-icon icon icon-back"></i>
-              </button>
-            </div>
-          </div>
+      <div className="col-10 col-mx-auto">
+          <h1 className="card-title h1" style={{textAlign: "center"}}>Post</h1>
+        <div className="col-10 col-mx-auto">
+          <p>
+            <strong>Title: </strong>
+            {this.state.post.title}&nbsp;{this.state.post.fact}
+          </p>
+        </div>
+        <div className="col-10 col-mx-auto">
+            <p>
+              <strong>Body: </strong>
+              {this.state.post.body}
+            </p>
+        </div>
+        <div className="col-10 col-mx-auto">
+          <p>
+            <strong>Published: </strong>
+            {this.state.post.published.toString()}
+          </p>
+          <button className="btn btn-primary btn-md" title="edit" onClick={() => {this.props.showPost();this.props.editPost()}}>
+            <i className="icon icon-edit"></i>
+          </button>
+          <button style={{marginLeft: "3px"}} className="btn btn-primary btn-md" onClick={() => this.props.showPost()}>
+            <i className="form-icon icon icon-back"></i>
+          </button>
         </div>
       </div>
     );
