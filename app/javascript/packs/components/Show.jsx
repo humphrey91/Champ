@@ -24,7 +24,7 @@ class Show extends Component {
 
   render() {
     return (
-      <div className="col-10 col-mx-auto">
+      <div style={{minWidth: "200px",maxWidth:"400px"}}>
           <h1 className="card-title h1" style={{textAlign: "center"}}>Post</h1>
         <div className="col-10 col-mx-auto">
           <p>
